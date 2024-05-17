@@ -33,7 +33,7 @@ class SqlServer(object):
         return res
     
     def get_next_aa(self):
-        result = self.cursor.execute(f'select [dbo].[fnGetNextRunID]() as next_run_aa')
+        result = self.cursor.execute(f'select [dbo].[SFN_GET_NEXT_AA]() as next_run_aa')
         for row in result:
             res = row.next_run_aa
         return res
