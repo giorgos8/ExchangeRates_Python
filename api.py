@@ -27,7 +27,7 @@ def main():
     conn_string = get_connection_string()
     sink = SqlServer(conn_string)
         
-    print('======= START PROGRAM =========')
+    print('======= START THE PROGRAM =========')
     logging.debug('======= START PROGRAM =========')
     
     #print(sink.get_exchange_rate_from_db('2024-05-13', 'EUR'))
