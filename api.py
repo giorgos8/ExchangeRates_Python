@@ -17,7 +17,7 @@ coins = os.environ.get("exchange_rates_currency")
 endpoint = os.environ.get("exchange_rates_endpoint")
 conn_string = os.environ.get("exchange_rates_conn_string")
 
-# function that return the 
+# function that return the connection string
 def get_connection_string():
   return conn_string
 
@@ -83,8 +83,8 @@ def main():
         exchange_date = date_from
         exchange_rates, rate = req.get_exchange_rates_hst(exchange_date, coins, api_id)
         sink.insert_exchange_rates(exchange_rates, coins, exchange_date)        
-        date_from += delta
         print('Exchange Rate USD to ' + coins + ': ' + str(rate))
+        date_from += delta        
         
     sink.write_db_trace('END', 'INFO', next_run_aa)    
     
