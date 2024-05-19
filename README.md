@@ -1,10 +1,15 @@
-# Project Title
+# Exchange Rates
 
-Exchange Rates
+The target is to call the API https://docs.openexchangerates.org/reference/api-introduction with Exchange Rates daily and input the data into a SQL Server Database table
 
 ## Description
 
-The target is to call an API with Exchange Rates daily and input the data into a SQL Server Database table
+1. Using OOP (Python)...
+The task is to extract data from a web source (Open Exchange Rates), transforms the dataset (convert from USD base to EUR) and loads it into a database (ETL).
+2. Using RDBMS (SQL Server 2019) ...
+The data is loadind daily into a table. Then we create views-reports about the data and statistics.
+3. Using C# (.NET)
+a simple user can use a simle Windows Application to admin, watch and run (re-run) the API
 
 ## Getting Started
 
@@ -13,19 +18,15 @@ The target is to call an API with Exchange Rates daily and input the data into a
 * SQL Server with Version >= 2017
 * Python 3.11
 
-### Configuration (global environmental variables)
+### Configuration - modifications needed
 
 ```
+#global environmental variables
 api_id = os.environ.get("exchange_rates_api_id")
 coins = os.environ.get("exchange_rates_currency")
 endpoint = os.environ.get("exchange_rates_endpoint")
 conn_string = os.environ.get("exchange_rates_conn_string")
 ```
-
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
 
 ### Executing
 
@@ -48,8 +49,8 @@ Use Postman to call ad-hoq the API
 
 ## Authors
 
-ex. Giorgos Kokkinos
-ex. giorgos.kokkinos@gmail.com
+Giorgos Kokkinos
+giorgos.kokkinos@gmail.com
 
 ## Version History
 
