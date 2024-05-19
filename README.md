@@ -4,14 +4,9 @@ The target is to call the API https://docs.openexchangerates.org/reference/api-i
 
 ## Description
 
-1. Using OOP (Python)...
-The task is to extract data from a web source (Open Exchange Rates), transforms the dataset (convert from USD base to EUR) and loads it into a database (ETL).
-2. Using RDBMS (SQL Server 2019) ...
-The data is loadind daily into a table. Then we create views-reports about the data and statistics.
-3. Using C# (.NET)
-a simple user can use a simle Windows Application to admin, watch and run (re-run) the API
-
-## Getting Started
+1. Using OOP (Python): https://github.com/giorgos8/ExchangeRates_Python we extract data from a web source (Open Exchange Rates), transforms the dataset (convert from USD base to EUR) and loads it into a database (ETL).
+2. Using RDBMS (SQL Server 2019): https://github.com/giorgos8/ExchangeRates_DB the extracted data is loadind daily into a table. Then we create views-reports about the data and statistics.
+3. Using C# (.NET): https://github.com/giorgos8/ExchangeRates_C_Sharp a simple user can use a simle Windows Application to admin, watch and run (re-run) the API
 
 ### Local Setup
 
