@@ -8,7 +8,7 @@ The target is to call an API with Exchange Rates daily and input the data into a
 
 ## Getting Started
 
-### Installations
+### Local Setup
 
 * SQL Server with Vesrion >= 2017
 * Python 3.11
@@ -18,7 +18,7 @@ The target is to call an API with Exchange Rates daily and input the data into a
 * How/where to download your program
 * Any modifications needed to be made to files/folders
 
-### Executing program
+### Executing
 
 * The default CLI command haven't any argument and import just the current date.
 ```
