@@ -1,6 +1,6 @@
 # Exchange Rates
 
-The target is to call the API https://docs.openexchangerates.org/reference/api-introduction with Exchange Rates daily and input the data into a SQL Server Database table
+The basic target is to call the API https://docs.openexchangerates.org/reference/api-introduction with Exchange Rates daily and input the data into a SQL Server Database table
 
 ## Description
 
@@ -12,15 +12,18 @@ The target is to call the API https://docs.openexchangerates.org/reference/api-i
 
 * SQL Server with Version >= 2017
 * Python 3.11
+* Windows OS, .NET Framework
 
-### Configuration - modifications needed
+### Configuration - Modifications needed
 
 ```
-#global environmental variables
-api_id = os.environ.get("exchange_rates_api_id")
-coins = os.environ.get("exchange_rates_currency")
-endpoint = os.environ.get("exchange_rates_endpoint")
-conn_string = os.environ.get("exchange_rates_conn_string")
+Global Environmental Variables 
+os.environ.get("exchange_rates_api_id") e.g. 51484b1ac5314ea894bf33038f24515d
+os.environ.get("exchange_rates_currency") e.g. EUR
+os.environ.get("exchange_rates_endpoint") e.g. https://openexchangerates.org/api
+os.environ.get("exchange_rates_conn_string") e.g. Driver=SQL Server Native Client 11.0;Server=.;Database=EXCHANGE_RATES_DB;Trusted_Connection=yes
+exchange_rates_python_exe_path e.g. C:\GIORGOS\Pythons\Python311\Python.exe
+exchange_rates_python_script_path: e.g. C:\GIORGOS\ExchangeRates\ExchangeRates_Python\api.py
 ```
 
 ### Executing
