@@ -10,8 +10,17 @@ The target is to call an API with Exchange Rates daily and input the data into a
 
 ### Local Setup
 
-* SQL Server with Vesrion >= 2017
+* SQL Server with Version >= 2017
 * Python 3.11
+
+### Configuration (global environmental variables)
+
+'''
+api_id = os.environ.get("exchange_rates_api_id")
+coins = os.environ.get("exchange_rates_currency")
+endpoint = os.environ.get("exchange_rates_endpoint")
+conn_string = os.environ.get("exchange_rates_conn_string")
+'''
 
 ### Installing
 
@@ -33,12 +42,9 @@ python api.py 2024-01-01 2024-01-31
 python -m pytest -v
 ```
 
-## Help
+## Help for Testing
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+Use Postman to call ad-hoq the API
 
 ## Authors
 
