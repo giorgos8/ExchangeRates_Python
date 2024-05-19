@@ -1,10 +1,10 @@
 # Project Title
 
-Simple overview of use/purpose.
+Exchange Rates
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+The target is to call an API with Exchange Rates daily and input the data into a SQL Server Database table
 
 ## Getting Started
 
