@@ -15,12 +15,12 @@ The target is to call an API with Exchange Rates daily and input the data into a
 
 ### Configuration (global environmental variables)
 
-'''
+```
 api_id = os.environ.get("exchange_rates_api_id")
 coins = os.environ.get("exchange_rates_currency")
 endpoint = os.environ.get("exchange_rates_endpoint")
 conn_string = os.environ.get("exchange_rates_conn_string")
-'''
+```
 
 ### Installing
 
