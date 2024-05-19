@@ -8,10 +8,10 @@ The target is to call an API with Exchange Rates daily and input the data into a
 
 ## Getting Started
 
-### Dependencies
+### Installations
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* SQL Server with Vesrion >= 2017
+* Python 3.11
 
 ### Installing
 
@@ -20,10 +20,17 @@ The target is to call an API with Exchange Rates daily and input the data into a
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* The default CLI command haven't any argument and import just the current date.
 ```
-code blocks for commands
+python api.py
+```
+* The CLI command must also accept two arguments start_date and end_date in case we need to do a backfilling or re-import some dates in case an issue arised.
+```
+python api.py 2024-01-01 2024-01-31
+```
+* To run Unit & Integration tests
+```
+python -m pytest -v
 ```
 
 ## Help
@@ -35,28 +42,11 @@ command to run if program contains helper info
 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+ex. Giorgos Kokkinos
+ex. giorgos.kokkinos@gmail.com
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
 
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
