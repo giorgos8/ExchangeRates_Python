@@ -17,6 +17,7 @@ coins = os.environ.get("exchange_rates_currency")
 endpoint = os.environ.get("exchange_rates_endpoint")
 conn_string = os.environ.get("exchange_rates_conn_string")
 
+
 # function that return the connection string
 def get_connection_string():
   return conn_string
