@@ -1,5 +1,5 @@
 import json
-from database import SqlServer
+from database import SqlServer_ExchRates
 from req import Req
 import database
 import pyodbc
@@ -32,7 +32,7 @@ def main():
     
     # db connection
     try:
-        sink = SqlServer(get_connection_string())
+        sink = SqlServer_ExchRates(get_connection_string())
     except:
         raise Exception("Error connecting to db!")
     

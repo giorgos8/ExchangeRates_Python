@@ -2,6 +2,7 @@ import pyodbc
 
 class SqlServer(object):
   
+    # constructor
     def __init__(self, con_str):
         connection_string = con_str
         con = pyodbc.connect(connection_string)
@@ -11,31 +12,39 @@ class SqlServer(object):
     def commit(self):
         self.cursor.commit()
 
+    def execute_sql_script(self, sql, commit=False):
+        self.cursor.execute(sql)
+        if commit == True:
+            self.commit()
+            
+    def select_sql_one_value(self, sql):
+        result = self.cursor.execute(sql)
+        for row in result:
+            res = row[0]
+        return res
+    
+    
+# inheritans
+class SqlServer_ExchRates(SqlServer):
     
     def insert_exchange_rates(self, exchange_rates, coin, date):
         data = (exchange_rates['base'], coin, date, exchange_rates['rates'][coin])        
 
-        sqlDelete = f"DELETE FROM [dbo].[EXCHANGE_RATES] WHERE [FROM_CURRENCY] = '{data[0]}' AND [TO_CURRENCY] = '{data[1]}' AND [DATE] = '{data[2]}'"
-        self.cursor.execute(sqlDelete)
+        sql = f"DELETE FROM [dbo].[EXCHANGE_RATES] WHERE [FROM_CURRENCY] = '{data[0]}' AND [TO_CURRENCY] = '{data[1]}' AND [DATE] = '{data[2]}'"
+        self.execute_sql_script(sql, False)
 
-        sqlInsert = f"INSERT INTO [dbo].[EXCHANGE_RATES] ([FROM_CURRENCY], [TO_CURRENCY], [DATE], [EXCHANGE_RATE]) VALUES ('{data[0]}', '{data[1]}', '{data[2]}', {data[3]})"
-        self.cursor.execute(sqlInsert)
+        sql = f"INSERT INTO [dbo].[EXCHANGE_RATES] ([FROM_CURRENCY], [TO_CURRENCY], [DATE], [EXCHANGE_RATE]) VALUES ('{data[0]}', '{data[1]}', '{data[2]}', {data[3]})"
+        self.execute_sql_script(sql, True)
+                
+    def write_db_trace(self, msg, info, run_aa):
+        sqlExec = f"EXEC [dbo].[usp_write_trace] @INPUTMESSAGE='{msg}', @INFO='{info}', @RUNID={run_aa}"
+        self.execute_sql_script(sqlExec, True)
+        return True
         
-        self.commit()
+    def get_next_aa(self):
+        sql = f'select [dbo].[SFN_GET_NEXT_AA]() as next_run_aa'
+        return self.select_sql_one_value(sql)       
         
     def get_exchange_rate_from_db(self, date, coin):        
-        result = self.cursor.execute(f"SELECT [EXCHANGE_RATE] FROM [dbo].[EXCHANGE_RATES] WHERE [FROM_CURRENCY] = 'USD' AND [TO_CURRENCY] = '{coin}' AND [DATE] = '{date}'")
-        for row in result:
-            res = row.EXCHANGE_RATE
-        return res
-    
-    def get_next_aa(self):
-        result = self.cursor.execute(f'select [dbo].[SFN_GET_NEXT_AA]() as next_run_aa')
-        for row in result:
-            res = row.next_run_aa
-        return res
-        
-    def write_db_trace(self, msg, info, run_aa):
-        self.cursor.execute(f"EXEC [dbo].[usp_write_trace] @INPUTMESSAGE=?, @INFO=?, @RUNID=?", msg, info, run_aa)
-        self.commit()
-        return True
+        sql = f"SELECT [EXCHANGE_RATE] FROM [dbo].[EXCHANGE_RATES] WHERE [FROM_CURRENCY] = 'USD' AND [TO_CURRENCY] = '{coin}' AND [DATE] = '{date}'"
+        return self.select_sql_one_value(sql)
