@@ -18,5 +18,5 @@ class Req(object):
         print(response.status_code)
         #print(response.url)
         exc_rts = json.loads(response.content)
-        #print(response.text[:200])
+        #print(response.text[:200])        
         return exc_rts, exc_rts['rates'][coins]

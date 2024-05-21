@@ -80,14 +80,15 @@ def main():
     
     # iterate over range of dates
     while (date_from <= date_to):
-        print(date_from, end="\n")        
+        print(date_from, end="\n")
         exchange_date = date_from
         exchange_rates, rate = req.get_exchange_rates_hst(exchange_date, coins, api_id)
-        sink.insert_exchange_rates(exchange_rates, coins, exchange_date)        
+        sink.insert_exchange_rates(exchange_rates, coins, exchange_date)       
         print('Exchange Rate USD to ' + coins + ': ' + str(rate))
-        date_from += delta        
+        sink.write_db_trace(date_from, 'INFO', next_run_aa)
+        date_from += delta
         
-    sink.write_db_trace('END', 'INFO', next_run_aa)    
+    sink.write_db_trace('END', 'INFO', next_run_aa)
     
     
 if __name__ == '__main__':
@@ -100,9 +101,3 @@ if __name__ == '__main__':
         print('======= END PROGRAM WITH ERROR =========')
         logging.error('@@@ Error @@@: ' + str(e))        
         raise e
-
-
-
-
-  
-
