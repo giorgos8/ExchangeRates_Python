@@ -52,7 +52,7 @@ class SqlServer_ExchRates(SqlServer):
         return self.select_sql_one_value(sql, 0)       
         
     def get_exchange_rate_from_db(self, date, coin):        
-        sql = f"SELECT [EXCHANGE_RATE] FROM [dbo].[EXCHANGE_RATES] WHERE [FROM_CURRENCY] = 'USD' AND [TO_CURRENCY] = '{coin}' AND [DATE] = '{date}'"
+        sql = f"SELECT cast([EXCHANGE_RATE] as float) FROM [dbo].[EXCHANGE_RATES] WHERE [FROM_CURRENCY] = 'USD' AND [TO_CURRENCY] = '{coin}' AND [DATE] = '{date}'"
         return self.select_sql_one_value(sql, 0)
         
         
@@ -96,8 +96,6 @@ class PostgreSQL_ExchRates(PostgreSQL):
         sql = f"INSERT INTO EXCHANGE_RATES (FROM_CURRENCY, TO_CURRENCY, DATE, EXCHANGE_RATE) VALUES ('{data[0]}', '{data[1]}', '{data[2]}', {data[3]})"
         self.execute_sql_script(sql)
         
-        
-                
     def write_db_trace(self, msg, info, run_aa):        
         return True
         
