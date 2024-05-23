@@ -1,5 +1,6 @@
 import json
 from database import SqlServer_ExchRates
+from database import PostgreSQL_ExchRates
 from req import Req
 import database
 import pyodbc
@@ -7,6 +8,8 @@ from datetime import datetime, timedelta
 import sys
 import os
 import logging
+import json
+import ast
 
 # configuration log file
 logging.basicConfig(filename='exchange_rates_logs.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -18,27 +21,68 @@ endpoint = os.environ.get("exchange_rates_endpoint")
 conn_string = os.environ.get("exchange_rates_conn_string")
 
 
+
+
 # function that return the connection string
 def get_connection_string():
   return conn_string
 
 def main():    
     
-    # crate api call object
+    # create api call object
     try:
         req = Req(endpoint)
     except:
         raise Exception("Error on creation api object!")
     
-    # db connection
-    try:
-        sink = SqlServer_ExchRates(get_connection_string())
-    except:
-        raise Exception("Error connecting to db!")
+    
+    # read rdbms connection config
+    rdbms_use = ""
+    f = open("RDBMS.txt", "r")
+    rdbms_use = f.readline().strip() # read first line
+    print(rdbms_use)
+    f.close()
+        
+    
+    if rdbms_use == "SQLSERVER":
+    
+        #-----------------------------------------------    
+        #------------------ SQL SERVER -----------------
+        #-----------------------------------------------
+        
+        try:
+            sink = SqlServer_ExchRates(get_connection_string())
+        except:
+            raise Exception("Error connecting to sql server db!")
+            
+    elif rdbms_use == "POSTGRESQL":
+    
+        #-----------------------------------------------
+        #------------------ PostgreSQL -----------------
+        #-----------------------------------------------        
+        
+        # postgresql conf settings
+        postgresql_con = {}
+        with open('postgresql_con_file.json', 'r') as file:
+            data = file.read().strip()
+            postgresql_con = json.loads(repr(data))
+            # convert str to dict
+            postgresql_con = ast.literal_eval(postgresql_con)
+        
+        try:
+            sink = PostgreSQL_ExchRates(postgresql_con)
+        except:
+            raise Exception("Error connecting to postgresql db!")
+            
+    else:
+        raise Exception("no RDBMS setting!!!")
+        
+    
     
     logging.debug('Connect to db succssesfully!')
     
     # get next aa for db table logs
+    
     next_run_aa = 0
     next_run_aa = sink.get_next_aa()
     

@@ -1,3 +1,7 @@
 exchange_rates_logs.log
 __pycache__
 .pytest_cache
+api - Copy.py
+database - Copy.py
+postgresql_con_file.json
+RDBMS.txt
